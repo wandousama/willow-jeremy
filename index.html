@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WandouSAMA&amp;Anonymelon - A couple who writes code for a living.</title>
+    <link href='css/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/flexslider.css" rel="stylesheet" >
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/queries.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+      </head>
+      <body id="top">
+        <header id="home">
+          <nav>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+                  <nav class="pull">
+                    <ul class="top-nav">
+                      <li><a href="#intro">Introduction <span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
+                      <li><a href="#features">Features <span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
+                      <li><a href="#responsive">Responsive Design <span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
+                      <li><a href="#portfolio">Portfolio <span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
+                      <li><a href="#team">Team <span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
+                      <li><a href="#contact">Get in Touch <span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </nav>
+          <section class="hero" id="hero">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12 text-right navicon">
+                  <a id="nav-toggle" class="nav_slide_button" href="#"><span></span></a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center inner">
+                  <h1 class="animated fadeInDown">WandouSAMA<span>Anonymelon</span></h1>
+                  <p class="animated fadeInUp delay-05s">A couple who writes <em>code</em> for a living.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </header>
+        <section class="intro text-center section-padding" id="intro">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2 wp1">
+                <h1 class="arrow">Rails Assets Pipeline Bug小记</h1>
+                <p class="time">2015-10-23 12:08 AM</p>
+                <p class='text-left font-color-black'>
+  前段时间在用Rails部署生产环境时遇到一个诡异的情况，在生产环境的集群下面每台机器build出来的assets摘要（digest）后缀不一样，这导致了在loadbalance访问时随机出现assets 404 的情况。<br/><br/>
+
+  经过debug后发现是由于一个第三方的前端类库（angular-rails-templates）在做assets pipeline的时候根据项目的path改了<code>Rails.application.config.assets.version</code>，这导致只要项目的path不一样算出来的asset version都不一样。而asset version是用来计算所有assets的digest后缀的key。<br/><br/>
+
+  在我们生产集群环境中的每个project root path都不一样（根据自动化部署的时间），所以每台机器经过assets pipeline打出来的assets后缀也都不同了。（Rails assets pipeline是个坑？也许。。）<br/><br/>
+
+  我们总是在挖坑填坑中积累经验，所以在debug期间研究了一下Rails做assets pipeline的过程，简单记录一下。<br/><br/>
+  </p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2 wp1">
+                <h1 class="arrow">Some </h1>
+                <p class="time">2015-10-23 12:08 AM</p>
+                <p>Sed a lorem quis neque interdum <a href="#">consequat ut sed sem</a>. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent id tempor ipsum. Fusce at massa ac nunc porta fringilla sed eget neque. Quisque quis pretium nulla. Fusce eget bibendum neque, vel volutpat augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <div class="row">
+              <div class="col-md-8 col-md-offset-2 wp1">
+                <h1 class="arrow">Bootstrap Professionals</h1>
+                <p class="time">2015-10-23 12:08 AM</p>
+                  <div id="servicesSlider">
+                    <ul class="slides">
+                     <li>
+                       <div class="post-pic">
+                       <img src='img/iphone-bg.png'></img>
+                       </div>
+                      </li>
+                      <li>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies nulla non metus pulvinar imperdiet. Praesent non adipiscing libero. </p>
+                        <p>
+                        Mauris ultrices odio vitae nulla ultrices iaculis. Nulla rhoncus odio eu lectus faucibus facilisis. Maecenas ornare augue vitae sollicitudin accumsan. </p>
+                        <p>Etiam eget libero et erat eleifend consectetur a nec lectus. Sed id tellus lorem. Suspendisse sed venenatis odio, quis lobortis eros.</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+           </div>
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+              <a href="#intro" class="learn-more-btn">More</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="swag text-center">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2">
+                <h1>Our story starts from <span>2014.05.13 <em>AM</em> </span></h1>
+                <a href="#portfolio" class="down-arrow-btn"><i class="fa fa-chevron-down"></i></a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="portfolio text-center section-padding" id="portfolio">
+          <div class="container">
+            <div class="row">
+              <div id="portfolioSlider">
+                <ul class="slides">
+                  <li>
+                    <div class="col-md-4 wp4">
+                      <div class="overlay-effect effects clearfix">
+                        <div class="img">
+                          <img src="img/portfolio-01.jpg" alt="Portfolio Item">
+                          <div class="overlay">
+                            <a href="#" class="expand"><i class="fa fa-search"></i><br>View More</a>
+                            <a class="close-overlay hidden">x</a>
+                          </div>
+                        </div>
+                      </div>
+                      <h2>四窗岩漂流</h2>
+                      <p>漂流漂流漂流漂流漂流漂流漂流漂流漂流.</p>
+                    </div>
+                    <div class="col-md-4 wp4 delay-05s">
+                      <div class="overlay-effect effects clearfix">
+                        <div class="img">
+                          <img src="img/portfolio-02.jpg" alt="Portfolio Item">
+                          <div class="overlay">
+                            <a href="#" class="expand"><i class="fa fa-search"></i><br>View More</a>
+                            <a class="close-overlay hidden">x</a>
+                          </div>
+                        </div>
+                      </div>
+                      <h2>苏州</h2>
+                      <p>拙政园 虎丘 没开门的唐寅祠 观前街.</p>
+                    </div>
+                    <div class="col-md-4 wp4 delay-1s">
+                      <div class="overlay-effect effects clearfix">
+                        <div class="img">
+                          <img src="img/portfolio-03.jpg" alt="Portfolio Item">
+                          <div class="overlay">
+                            <a href="#" class="expand"><i class="fa fa-search"></i><br>View More</a>
+                            <a class="close-overlay hidden">x</a>
+                          </div>
+                        </div>
+                      </div>
+                      <h2>大明山滑雪</h2>
+                      <p>滑雪 摔倒 滑雪 摔倒 滑雪 摔倒 滑雪 摔倒 滑雪 摔倒 滑雪 摔倒 滑雪 摔倒 滑雪 摔倒 滑雪 摔倒. 温泉</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="col-md-4 wp4">
+                      <div class="overlay-effect effects clearfix">
+                        <div class="img">
+                          <img src="img/portfolio-01.jpg" alt="Portfolio Item">
+                          <div class="overlay">
+                            <a href="#" class="expand"><i class="fa fa-search"></i><br>View More</a>
+                            <a class="close-overlay hidden">x</a>
+                          </div>
+                        </div>
+                      </div>
+                      <h2>2015外滩跨年</h2>
+                      <p>人人人人人人人人人人人人人人人人人人人人人人人人人人人人人人人人人人人人我你.</p>
+                    </div>
+                    <div class="col-md-4 wp4 delay-05s">
+                      <div class="overlay-effect effects clearfix">
+                        <div class="img">
+                          <img src="img/portfolio-02.jpg" alt="Portfolio Item">
+                          <div class="overlay">
+                            <a href="#" class="expand"><i class="fa fa-search"></i><br>View More</a>
+                            <a class="close-overlay hidden">x</a>
+                          </div>
+                        </div>
+                      </div>
+                      <h2>嵊泗</h2>
+                      <p>坐船 下雨 冷 冷 洗脚 洗脚 洗脚 冷 冷 踢球 踢球 踢球 踢球 脚丫疼 不冷 不冷 不冷 不冷 吃海鲜 吃海鲜 坐船 。</p>
+                    </div>
+                    <div class="col-md-4 wp4 delay-1s">
+                      <div class="overlay-effect effects clearfix">
+                        <div class="img">
+                          <img src="img/portfolio-03.jpg" alt="Portfolio Item">
+                          <div class="overlay">
+                            <a href="#" class="expand"><i class="fa fa-search"></i><br>View More</a>
+                            <a class="close-overlay hidden">x</a>
+                          </div>
+                        </div>
+                      </div>
+                      <h2>东天目山</h2>
+                      <p> 拍照 爬山 爬山 拍照 爬山 累 爬山 爬山 拍照 爬山 累 爬山 拍照 累 累 累 累 累 拍照.</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+         <section class="subscribe text-center">
+          <div class="container">
+            <h1><i class="fa fa-paper-plane"></i><span>Leave a message to us</span></h1>
+            <form action="#">
+              <input type="text" name="" value="" placeholder="" required>
+              <input type="submit" name="" value="Send">
+            </form>
+          </div>
+        </section>
+        <div class="contact-wrap">
+            <a href="#top" class="up-btn"><i class="fa fa-chevron-up"></i></a>
+          </div>
+        <footer>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <ul class="social-buttons">
+                  <li><a href="https://github.com/anonymelon" class="social-btn"><i class="fa fa-github"></i></a></li>
+                  <li><a href="http://weibo.com/wandouyaha" class="social-btn"><i class="fa fa-weibo"></i></a></li>
+                  <li><a href="http://www.xiachufang.com/cook/11290088" class="social-btn"><i class="fa fa-cutlery"></i></a></li>
+                  <li><a href="mailto:wandou350@gmail.com" class="social-btn"><i class="fa fa-envelope"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="js/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/waypoints.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/scripts.js"></script>
+        <script src="js/jquery.flexslider.js"></script>
+        <script src="js/modernizr.js"></script>
+      </body>
+    </html>

@@ -1,0 +1,19 @@
+{
+  "name": "willow-jeremy",
+  "version": "1.0.0",
+  "description": "Template use \"Halcyon Days\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wandousama/willow-jeremy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wandousama/willow-jeremy/issues"
+  },
+  "homepage": "https://github.com/wandousama/willow-jeremy#readme"
+}

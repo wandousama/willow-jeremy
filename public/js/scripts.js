@@ -3,11 +3,11 @@
 $(document).ready(function() {
 
      $(document).ready(function(){
-          $.get("json/blog.json",function(data,status){
+          $.get("blogs",function(data,status){
             $("#intro .container").html(
               function () {
                 var result='';
-                var postList = jQuery.parseJSON(data);
+                var postList = data;
                 for(var index in postList) {
                   if(JSON.stringify(postList[index]).length > 10) {
                     result+='<div class="row">';
@@ -39,7 +39,7 @@ $(document).ready(function() {
               function () {
                 var result='';
                 var photoHtml;
-                var photoList = jQuery.parseJSON(data);
+                var photoList = data;
                 for(var index in photoList) {
                   // var pli = document.createElement("li");
                   if(JSON.stringify(photoList[index]).length > 10) {

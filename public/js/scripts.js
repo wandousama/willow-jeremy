@@ -131,7 +131,7 @@ var setClass = function() {
 $(document).ready(function() {
 
   $.get("blogs",function(data,status){
-    $("#blogs .container").html(
+    $("#blogList").html(
       function () {
         var result='';
         var blogList = data;
@@ -164,10 +164,10 @@ $(document).ready(function() {
 
 
 
-  $.get("json/photo.json",function(data,status){
-    $("#photosSlider .slides").html(
+  $.get("photos",function(data,status){
+    $("#photosSlider").html(
       function () {
-        var result='';
+        var result='<ul class="slides">';
         var photoHtml;
         var photoList = data;
         for(var index in photoList) {
@@ -198,6 +198,7 @@ $(document).ready(function() {
             result+=photoHtml;
           }
         }
+        result+="</ul>";
         return result;
       }
     );
@@ -206,4 +207,33 @@ $(document).ready(function() {
      setFlexsliders();
   });
 
+    $("#submitMessage").click(function() {
+        var message= $("#message").val();
+        var result="Tanks for concat us !";
+        $('.concat-response').removeClass("red");
+        if(message.trim()=="") {
+            $('.concat-response').addClass("red")
+            $('#message').focus();
+            result="Hmm, No words to say?";
+        } else {
+            $.post(
+                "messages",
+                {
+                    content:message
+                },
+                function(data, status) {
+                    alert(status);
+                    if(status != 200) {
+                        $('.concat-response').addClass("red")
+                        result="Oops, Something Wrong!";
+                    }
+                },
+                'json'
+            );
+        }
+        $('.concat-response').html(result);
+        $('.concat-response').fadeIn("slow");
+        $('.concat-response').fadeOut(3000);
+
+    });
 });

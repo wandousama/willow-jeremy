@@ -222,7 +222,6 @@ $(document).ready(function() {
                     content:message
                 },
                 function(data, status) {
-                    alert(status);
                     if(status != 200) {
                         $('.concat-response').addClass("red")
                         result="Oops, Something Wrong!";

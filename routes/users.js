@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var MongoClient = require('mongodb').MongoClient;
-var MongoPool = require('../services/mongodb');
+var MongoPool = require('../services/mongo_pool');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {

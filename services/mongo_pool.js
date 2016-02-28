@@ -6,7 +6,7 @@ function MongoPool(){}
 var p_db;
 
 function initPool(cb){
-  MongoClient.connect('mongodb://localhost:27017/users', function(err, db) {
+  MongoClient.connect('mongodb://localhost:27017/wj', function(err, db) {
     if (err) throw err;
 
     p_db = db;

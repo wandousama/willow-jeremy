@@ -209,7 +209,7 @@ $(document).ready(function() {
 
     $("#submitMessage").click(function() {
         var message= $("#message").val();
-        var result="Tanks for concat us !";
+        var result="Thanks for concat us !";
         $('.concat-response').removeClass("red");
         if(message.trim()=="") {
             $('.concat-response').addClass("red")

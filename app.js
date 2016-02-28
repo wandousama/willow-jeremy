@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var blogs = require('./routes/blogs');
 var photos = require('./routes/photos');
+var messages = require('./routes/messages');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/blogs', blogs);
 app.use('/photos', photos);
+app.use('/messages', messages);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -41,6 +43,8 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
+    console.log(err, '@@@@@@@')
+    console.log(err, '@@@@@@@')
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,

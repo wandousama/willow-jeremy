@@ -1,3 +1,5 @@
+'use strict'
+
 var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
@@ -6,7 +8,7 @@ var MongoPool = require('../services/mongodb');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   MongoPool.getInstance(function (db){
-    db.collection('users').find().toArray(function(err, result) {
+    db.collection('messages').find().toArray(function(err, result) {
       if (err) {
         res.send(result);
       }
@@ -17,11 +19,9 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   MongoPool.getInstance(function (db){
-    db.collection('users').insertMany([
-      {a : 1}, {a : 2}, {a : 3}
-    ], function(err, result) {
+    db.collection('messages').insert(req.body, function(err, result) {
       if (err) {
-        res.send(result);
+        res.send(err);
       }
       res.send(result);
     });

@@ -82,7 +82,7 @@ var setFlexsliders=function() {
 		}
 	});
 
-	$('#blogsSlider').flexslider({
+	$('.blogsSlider').flexslider({
 		animation: "slide",
 		directionNav: false,
 		controlNav: true,
@@ -94,80 +94,79 @@ var setFlexsliders=function() {
 	});
 };
 
-var setClass = function() {
-    $('.wp1').waypoint(function() {
-    $('.wp1').addClass('animated fadeInLeft');
+var setClass = function(fatherNode) {
+    if(!fatherNode) {
+        fatherNode="";
+    }
+
+    $(fatherNode+'.wp1').waypoint(function() {
+    $(fatherNode+'.wp1').addClass('animated fadeInLeft');
     }, {
         offset: '75%'
     });
-    $('.wp2').waypoint(function() {
-        $('.wp2').addClass('animated fadeInUp');
+    $(fatherNode+'.wp2').waypoint(function() {
+        $(fatherNode+'.wp2').addClass('animated fadeInUp');
     }, {
         offset: '75%'
     });
-    $('.wp3').waypoint(function() {
-        $('.wp3').addClass('animated fadeInDown');
+    $(fatherNode+'.wp3').waypoint(function() {
+        $(fatherNode+'.wp3').addClass('animated fadeInDown');
     }, {
         offset: '55%'
     });
-    $('.wp4').waypoint(function() {
-        $('.wp4').addClass('animated fadeInDown');
+    $(fatherNode+'.wp4').waypoint(function() {
+        $(fatherNode+'.wp4').addClass('animated fadeInDown');
     }, {
         offset: '75%'
     });
-    $('.wp5').waypoint(function() {
-        $('.wp5').addClass('animated fadeInUp');
+    $(fatherNode+'.wp5').waypoint(function() {
+        $(fatherNode+'.wp5').addClass('animated fadeInUp');
     }, {
         offset: '75%'
     });
-    $('.wp6').waypoint(function() {
-        $('.wp6').addClass('animated fadeInDown');
+    $(fatherNode+'.wp6').waypoint(function() {
+        $(fatherNode+'.wp6').addClass('animated fadeInDown');
     }, {
         offset: '75%'
     });
 };
 
-
+var currentBlogNum=0;
 $(document).ready(function() {
 
-  $.get("blogs",function(data,status){
-    $("#blogList").html(
-      function () {
+    var buildBlogs = function(data) {
         var result='';
         var blogList = data;
         for(var index in blogList) {
-          if(JSON.stringify(blogList[index]).length > 10) {
-            result+='<div class="row">';
-            result+='<div class="col-md-8 col-md-offset-2 wp1">';
-            result+='<h1 class="arrow">'+blogList[index].title+'</h1>';
-            result+='<p class="time">@'+blogList[index].author+' '+blogList[index].time+'</p>';
-            if(blogList[index].image == null || blogList[index].image == "") {
-              result+='<p class="text-left font-color-black">'+blogList[index].content+'</p>';
-            } else {
-              result+='<div id="blogsSlider"><ul class="slides">';
-              result+='<li><div class="blog-pic"><img src="'+blogList[index].image+'"/></div</li>';
-              result+='<li>'+blogList[index].content+'</li>';
-              result+='</ul></div>';
+            if(JSON.stringify(blogList[index]).length > 10) {
+                result+='<div class="row">';
+                result+='<div class="col-md-8 col-md-offset-2 wp1">';
+                result+='<h1 class="arrow">'+blogList[index].title+'</h1>';
+                result+='<p class="time">@'+blogList[index].author+' '+blogList[index].time+'</p>';
+                if(blogList[index].image == null || blogList[index].image == "") {
+                  result+='<p class="text-left font-color-black">'+blogList[index].content+'</p>';
+                } else {
+                  result+='<div class="blogsSlider"><ul class="slides">';
+                  result+='<li><div class="blog-pic"><img src="'+blogList[index].image+'"/></div</li>';
+                  result+='<li>'+blogList[index].content+'</li>';
+                  result+='</ul></div>';
+                }
+                result+='</div>';
+                result+='</div>';
+
+                lastPostId=blogList[index]._id;
+
+                if(blogList.length != ++index) {
+                   result+='<hr>';
+                }
+                currentBlogNum++;
             }
-            result+='</div>';
-            result+='</div>';
-            if(blogList.length != ++index) {
-               result+='<hr>';
-            }
-          }
         }
         return result;
-      }
-    );
-    setClass();
-  });
+    }
 
-
-
-  $.get("photos",function(data,status){
-    $("#photosSlider").html(
-      function () {
-        var result='<ul class="slides">';
+    var buildPhotos = function(data) {
+        var result="";
         var photoHtml;
         var photoList = data;
         for(var index in photoList) {
@@ -183,7 +182,7 @@ $(document).ready(function() {
             photoHtml+='<div class="img">';
             photoHtml+='<img src="'+photoList[index].image+'" alt="Photos Item">';
             photoHtml+='<div class="overlay">';
-            photoHtml+='<a href="#" class="expand"><i class="fa fa-search"></i><br>View More</a>';
+            photoHtml+='<a href="#photos" class="expand"><i class="fa fa-search"></i><br>View More</a>';
             photoHtml+='<a class="close-overlay hidden">x</a>';
             photoHtml+='</div>';
             photoHtml+='</div>';
@@ -198,23 +197,41 @@ $(document).ready(function() {
             result+=photoHtml;
           }
         }
-        result+="</ul>";
         return result;
-      }
-    );
-     setClass();
-     setOverlays();
-     setFlexsliders();
-  });
+    }
+
+
+
+    $.get("blogs?limit=3",function(data,status){
+        $("#blogList").html(buildBlogs(data));
+        setClass();
+    });
+    $.get("photos",function(data,status){
+        $("#photosSlider .slides").html(buildPhotos(data));
+        setClass();
+        setOverlays();
+        setFlexsliders();
+    });
+
+
+    var messageNotice = function (responseMessage, isWarning) {
+        if(isWarning == 1) {
+            $('.concat-response').addClass("red")
+            $('#message').focus();
+        } else {
+            $('.concat-response').removeClass("red");
+            $("#message").val("");
+        }
+        $('.concat-response').html(responseMessage);
+        $('.concat-response').fadeIn("slow");
+        $('.concat-response').fadeOut(3000);
+    }
 
     $("#submitMessage").click(function() {
         var message= $("#message").val();
-        var result="Thanks for concat us !";
-        $('.concat-response').removeClass("red");
+
         if(message.trim()=="") {
-            $('.concat-response').addClass("red")
-            $('#message').focus();
-            result="Hmm, No words to say?";
+            messageNotice("Hmm, No words to say?", 1);
         } else {
             $.post(
                 "messages",
@@ -223,16 +240,28 @@ $(document).ready(function() {
                 },
                 function(data, status) {
                     if(status != 'success') {
-                        $('.concat-response').addClass("red")
-                        result="Oops, Something Wrong!";
+                        messageNotice("Oops, Something Wrong!", 1);
+                    } else {
+                        messageNotice("Thanks for concat us !", 0);
                     }
                 },
                 'json'
             );
-        }
-        $('.concat-response').html(result);
-        $('.concat-response').fadeIn("slow");
-        $('.concat-response').fadeOut(3000);
+            setTimeout(function () {
+                if($("#message").val() == message) {
+                    messageNotice("Oops, Something Wrong when leave message!", 1);
+                }
+            },1000);
 
+        }
+    });
+
+    $("#moreBlogs").click(function() {
+        $.get("blogs?limit=3&offset="+currentBlogNum,function(data,status){
+            $("#blogList").append("<hr>");
+            $("#blogList").append(buildBlogs(data));
+            setClass();
+            setFlexsliders();
+        });
     });
 });

@@ -4,11 +4,10 @@ var express = require('express');
 var router = express.Router();
 var MongoPool = require('../services/mongo_pool');
 
-
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   MongoPool.getInstance(function (db){
-    db.collection('blogs').find().toArray(function(err, result) {
+    db.collection('messages').find().toArray(function(err, result) {
       if (err) {
         res.send(err);
       }
@@ -19,7 +18,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   MongoPool.getInstance(function (db){
-    db.collection('blogs').insert(req.body, function(err, result) {
+    db.collection('messages').insert(req.body, function(err, result) {
       if (err) {
         res.send(err);
       }

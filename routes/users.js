@@ -1,14 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var MongoClient = require('mongodb').MongoClient;
-
+var MongoPool = require('../services/mongo_pool');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  MongoClient.connect('mongodb://localhost:27017/users', function(err, db) {
-    if (err) {
-      res.send(result);
-    }
+  MongoPool.getInstance(function (db){
     db.collection('users').find().toArray(function(err, result) {
       if (err) {
         res.send(result);
@@ -19,10 +15,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  MongoClient.connect('mongodb://localhost:27017/users', function(err, db) {
-    if (err) {
-      res.send(result);
-    }
+  MongoPool.getInstance(function (db){
     db.collection('users').insertMany([
       {a : 1}, {a : 2}, {a : 3}
     ], function(err, result) {

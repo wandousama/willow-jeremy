@@ -55,25 +55,27 @@
         </header>
         <section class="admin text-center section-padding">
           <div class="container">
-            <div class="left">
-              <label>标题：</label>
-              <label>作者：</label>
-              <label>时间：</label>
-              <label>图片：</label>
-              <label>内容：</label>
-            </div>
-            <div class="right">
-              <input type="text" name="title">
-              <select name="author">
-                <option value="Jeremy">Jeremy</option>
-                <option value="Willow">Willow</option>
-              </select>
-              <input type="text" name="time">
-              <input type="text" name="image">
-              <textarea name="content" rows="10"></textarea>
-              <input type="submit" name="" value="Publish">
-            </div>
+            <form action='blogs' method="post">
+              <div class="left">
+                <label>标题：</label>
+                <label>作者：</label>
+                <label>时间：</label>
+                <label>图片：</label>
+                <label>内容：</label>
+              </div>
+              <div class="right">
+                <input type="text" name="title">
+                <select name="author">
+                  <option value="Jeremy">Jeremy</option>
+                  <option value="Willow">Willow</option>
+                </select>
+                <input type="text" name="time">
+                <input type="text" name="image">
+                <textarea name="content" rows="10"></textarea>
+                <input type="submit" name="" value="Publish">
+              </div>
 
+            </form>
           </div>
         </section>
 

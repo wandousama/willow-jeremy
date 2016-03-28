@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="img/icon.jpg"/>
     <link href='css/css?family=Varela+Round' rel='stylesheet' type='text/css'>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/flexslider.css" rel="stylesheet" >
     <link href="css/styles.css" rel="stylesheet">
@@ -64,14 +65,17 @@
                 <label>内容：</label>
               </div>
               <div class="right">
-                <input type="text" name="title">
+                <input type="text" name="title" required>
                 <select name="author">
                   <option value="Jeremy">Jeremy</option>
                   <option value="Willow">Willow</option>
                 </select>
-                <input type="text" name="time">
-                <input type="text" name="image">
-                <textarea name="content" rows="10"></textarea>
+                <input type="text" name="time" class="datetimepicker" required>
+                <a href="javascript:{$('#up_file').click()};">
+                  <input type="file" id=up_file style="display: none;" onchange="up_file_name.value=value">
+                  <input name="up_file_name" disabled="disabled">
+                </a>
+                <textarea name="content" rows="10" required></textarea>
                 <input type="submit" name="" value="Publish">
               </div>
 
@@ -98,6 +102,7 @@
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/waypoints.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/bootstrap-datetimepicker.min.js"></script>
         <script src="js/scripts.js"></script>
         <script src="js/jquery.flexslider.js"></script>
         <script src="js/modernizr.js"></script>

@@ -200,7 +200,9 @@ $(document).ready(function() {
         return result;
     }
 
-
+    $('.datetimepicker').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii'
+    });
 
     $.get("blogs?limit=3",function(data,status){
         $("#blogList").html(buildBlogs(data));

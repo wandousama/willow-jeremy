@@ -55,6 +55,7 @@
           </section>
         </header>
         <section class="admin text-center section-padding">
+        <h1>Blogs</h1>
           <div class="container">
             <form action='blogs' method="post">
               <div class="left">
@@ -64,18 +65,53 @@
                 <label>图片：</label>
                 <label>内容：</label>
               </div>
-              <div class="right">
+              <div class="right" id="container">
                 <input type="text" name="title" required>
                 <select name="author">
                   <option value="Jeremy">Jeremy</option>
                   <option value="Willow">Willow</option>
                 </select>
                 <input type="text" name="time" class="datetimepicker" required>
-                <a href="javascript:{$('#up_file').click()};">
-                  <input type="file" id=up_file style="display: none;" onchange="up_file_name.value=value">
+
+              <!--   <a class="btn btn-default btn-lg " id="pickfiles" href="javascript:void(0);" style="position: relative; z-index: 1;">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>选择文件</span>
+                </a> -->
+                <a href="javascript:{$('#up_file').click()};" id="pickfiles">
+                  <!-- <input type="file" id=up_file style="display: none;" onchange="up_file_name.value=value"> -->
                   <input name="up_file_name" disabled="disabled">
                 </a>
                 <textarea name="content" rows="10" required></textarea>
+                <input type="submit" name="" value="Publish">
+              </div>
+
+            </form>
+          </div>
+        </section>
+
+         <section class="admin text-center section-padding">
+          <h1>Photos</h1>
+          <div class="container">
+            <form action='photos' method="post">
+              <div class="left">
+                <label>标题：</label>
+                <label>作者：</label>
+                <label>时间：</label>
+                <label>图片：</label>
+                <label>描述：</label>
+              </div>
+              <div class="right">
+                <input type="text" name="title" required>
+                <select name="author">
+                  <option value="Willow">Willow</option>
+                  <option value="Jeremy">Jeremy</option>
+                </select>
+                <input type="text" name="time" class="datetimepicker" required>
+                <a href="javascript:{$('#up_file').click()};" id='pickfiles_photos'>
+                  <input type="file" id=up_file style="display: none;" onchange="up_file_name.value=value">
+                  <input name="up_file_name" disabled="disabled">
+                </a>
+                <textarea name="content" rows="5" required></textarea>
                 <input type="submit" name="" value="Publish">
               </div>
 
@@ -106,5 +142,121 @@
         <script src="js/scripts.js"></script>
         <script src="js/jquery.flexslider.js"></script>
         <script src="js/modernizr.js"></script>
+        <script src="js/plupload.full.min.js"></script>
+        <!-- <script src="js/zh_CN.js"></script> -->
+        <script src="js/qiniu.min.js"></script>
+
+          <script type="text/javascript">
+
+          var option1 = {
+              runtimes: 'html5,flash,html4',
+              browse_button: 'pickfiles',
+              container: 'container',
+              drop_element: 'container',
+              max_file_size: '1000mb',
+              flash_swf_url: 'bower_components/plupload/js/Moxie.swf',
+              dragdrop: true,
+              chunk_size: '4mb',
+              uptoken_url: '/uptoken',
+              domain: 'http://qiniu-plupload.qiniudn.com/',
+              get_new_uptoken: false,
+              auto_start: true,
+              log_level: 5,
+              init: {
+                  'FilesAdded': function(up, files) {
+                      // $('table').show();
+                      // $('#success').hide();
+                      // plupload.each(files, function(file) {
+                      //     var progress = new FileProgress(file, 'fsUploadProgress');
+                      //     progress.setStatus("等待...");
+                      //     progress.bindUploadCancel(up);
+                      // });
+                  },
+                  'BeforeUpload': function(up, file) {
+                      // var progress = new FileProgress(file, 'fsUploadProgress');
+                      // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
+                      // if (up.runtime === 'html5' && chunk_size) {
+                      //     progress.setChunkProgess(chunk_size);
+                      // }
+                  },
+                  'UploadProgress': function(up, file) {
+                      // var progress = new FileProgress(file, 'fsUploadProgress');
+                      // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
+                      // progress.setProgress(file.percent + "%", file.speed, chunk_size);
+                  },
+                  'UploadComplete': function() {
+                      // $('#success').show();
+                  },
+                  'FileUploaded': function(up, file, info) {
+                      // var progress = new FileProgress(file, 'fsUploadProgress');
+                      // progress.setComplete(up, info);
+                  },
+                  'Error': function(up, err, errTip) {
+                      // $('table').show();
+                      // var progress = new FileProgress(err.file, 'fsUploadProgress');
+                      // progress.setError();
+                      // progress.setStatus(errTip);
+                  }
+              }
+          };
+          var uploader = Qiniu.uploader(option1);
+
+          // var Qiniu2 = new QiniuJsSDK();
+          // var option2 = {
+          //     runtimes: 'html5,flash,html4',
+          //     browse_button: 'pickfiles_2',
+          //     container: 'container',
+          //     drop_element: 'container',
+          //     max_file_size: '1000mb',
+          //     flash_swf_url: 'bower_components/plupload/js/Moxie.swf',
+          //     dragdrop: true,
+          //     chunk_size: '4mb',
+          //     uptoken_url: '/uptoken',
+          //     domain: 'http://qiniu-plupload.qiniudn.com/',
+          //     get_new_uptoken: false,
+          //     auto_start: true,
+          //     log_level: 5,
+          //     init: {
+          //         'FilesAdded': function(up, files) {
+          //             // $('table').show();
+          //             // $('#success').hide();
+          //             // plupload.each(files, function(file) {
+          //             //     var progress = new FileProgress(file, 'fsUploadProgress');
+          //             //     progress.setStatus("等待...");
+          //             //     progress.bindUploadCancel(up);
+          //             // });
+          //         },
+          //         'BeforeUpload': function(up, file) {
+          //             // var progress = new FileProgress(file, 'fsUploadProgress');
+          //             // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
+          //             // if (up.runtime === 'html5' && chunk_size) {
+          //             //     progress.setChunkProgess(chunk_size);
+          //             // }
+          //         },
+          //         'UploadProgress': function(up, file) {
+          //             // var progress = new FileProgress(file, 'fsUploadProgress');
+          //             // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
+          //             // progress.setProgress(file.percent + "%", file.speed, chunk_size);
+          //         },
+          //         'UploadComplete': function() {
+          //             // $('#success').show();
+          //         },
+          //         'FileUploaded': function(up, file, info) {
+          //             // var progress = new FileProgress(file, 'fsUploadProgress');
+          //             // progress.setComplete(up, info);
+          //         },
+          //         'Error': function(up, err, errTip) {
+          //             // $('table').show();
+          //             // var progress = new FileProgress(err.file, 'fsUploadProgress');
+          //             // progress.setError();
+          //             // progress.setStatus(errTip);
+          //         }
+          //     }
+          // };
+          // var uploader2 = Qiniu2.uploader(option2);
+
+
+
+          </script>
       </body>
     </html>

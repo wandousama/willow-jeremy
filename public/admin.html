@@ -65,7 +65,7 @@
                 <label>图片：</label>
                 <label>内容：</label>
               </div>
-              <div class="right" id="container">
+              <div class="right" id="container_blogs">
                 <input type="text" name="title" required>
                 <select name="author">
                   <option value="Jeremy">Jeremy</option>
@@ -77,7 +77,7 @@
                     <i class="glyphicon glyphicon-plus"></i>
                     <span>选择文件</span>
                 </a> -->
-                <a href="javascript:{$('#up_file').click()};" id="pickfiles">
+                <a href="javascript:{$('#up_file').click()};" id="pickfiles_blogs">
                   <!-- <input type="file" id=up_file style="display: none;" onchange="up_file_name.value=value"> -->
                   <input name="up_file_name" disabled="disabled">
                 </a>
@@ -100,15 +100,19 @@
                 <label>图片：</label>
                 <label>描述：</label>
               </div>
-              <div class="right">
+              <div class="right" id="container_photos">
                 <input type="text" name="title" required>
                 <select name="author">
                   <option value="Willow">Willow</option>
                   <option value="Jeremy">Jeremy</option>
                 </select>
                 <input type="text" name="time" class="datetimepicker" required>
-                <a href="javascript:{$('#up_file').click()};" id='pickfiles_photos'>
+               <!--  <a href="javascript:{$('#up_file').click()};" id='pickfiles_photos'>
                   <input type="file" id=up_file style="display: none;" onchange="up_file_name.value=value">
+                  <input name="up_file_name" disabled="disabled">
+                </a> -->
+                 <a href="javascript:{$('#up_file').click()};" id="pickfiles_photos">
+                  <!-- <input type="file" id=up_file style="display: none;" onchange="up_file_name.value=value"> -->
                   <input name="up_file_name" disabled="disabled">
                 </a>
                 <textarea name="content" rows="5" required></textarea>
@@ -150,9 +154,9 @@
 
           var option1 = {
               runtimes: 'html5,flash,html4',
-              browse_button: 'pickfiles',
-              container: 'container',
-              drop_element: 'container',
+              browse_button: 'pickfiles_blogs',
+              container: 'container_blogs',
+              drop_element: 'container_blogs',
               max_file_size: '1000mb',
               flash_swf_url: 'bower_components/plupload/js/Moxie.swf',
               dragdrop: true,
@@ -204,9 +208,9 @@
           // var Qiniu2 = new QiniuJsSDK();
           // var option2 = {
           //     runtimes: 'html5,flash,html4',
-          //     browse_button: 'pickfiles_2',
-          //     container: 'container',
-          //     drop_element: 'container',
+          //     browse_button: 'pickfiles_photos',
+          //     container: 'container_photos',
+          //     drop_element: 'container_photos',
           //     max_file_size: '1000mb',
           //     flash_swf_url: 'bower_components/plupload/js/Moxie.swf',
           //     dragdrop: true,

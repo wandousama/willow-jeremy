@@ -162,37 +162,13 @@
               dragdrop: true,
               chunk_size: '4mb',
               // uptoken_url: 'http://jssdk.demo.qiniu.io/uptoken',
-              uptoken: '0MLvWPnyya1WtPnXFy9KLyGHyFPNdZceomLVk0c9:wIAnrKft-gLtAp0gfbpP9lmH_Xc=:eyJzY29wZSI6InFpbml1LXBsdXBsb2FkIiwiZGVhZGxpbmUiOjE0NjA1MzAyNDR9',
+              uptoken: '0MLvWPnyya1WtPnXFy9KLyGHyFPNdZceomLVk0c9:zQrXlX2C__GNj4K_xEfV4tL6QdM=:eyJzY29wZSI6InFpbml1LXBsdXBsb2FkIiwiZGVhZGxpbmUiOjE0NjA1NDc2MjJ9',
               //http://jssdk.demo.qiniu.io/uptoken
               domain: 'http://qiniu-plupload.qiniudn.com/',
               get_new_uptoken: false,
               auto_start: true,
               log_level: 5,
               init: {
-                  'FilesAdded': function(up, files) {
-                      // $('table').show();
-                      // $('#success').hide();
-                      // plupload.each(files, function(file) {
-                      //     var progress = new FileProgress(file, 'fsUploadProgress');
-                      //     progress.setStatus("等待...");
-                      //     progress.bindUploadCancel(up);
-                      // });
-                  },
-                  'BeforeUpload': function(up, file) {
-                      // var progress = new FileProgress(file, 'fsUploadProgress');
-                      // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
-                      // if (up.runtime === 'html5' && chunk_size) {
-                      //     progress.setChunkProgess(chunk_size);
-                      // }
-                  },
-                  'UploadProgress': function(up, file) {
-                      // var progress = new FileProgress(file, 'fsUploadProgress');
-                      // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
-                      // progress.setProgress(file.percent + "%", file.speed, chunk_size);
-                  },
-                  'UploadComplete': function() {
-                      // $('#success').show();
-                  },
                   'FileUploaded': function(up, file, info) {
                       // var progress = new FileProgress(file, 'fsUploadProgress');
                       // progress.setComplete(up, info);
@@ -211,59 +187,38 @@
           };
           var uploader = Qiniu.uploader(option1);
 
-          // var Qiniu2 = new QiniuJsSDK();
-          // var option2 = {
-          //     runtimes: 'html5,flash,html4',
-          //     browse_button: 'pickfiles_photos',
-          //     container: 'container_photos',
-          //     drop_element: 'container_photos',
-          //     max_file_size: '1000mb',
-          //     flash_swf_url: 'bower_components/plupload/js/Moxie.swf',
-          //     dragdrop: true,
-          //     chunk_size: '4mb',
-          //     uptoken_url: '/uptoken',
-          //     domain: 'http://qiniu-plupload.qiniudn.com/',
-          //     get_new_uptoken: false,
-          //     auto_start: true,
-          //     log_level: 5,
-          //     init: {
-          //         'FilesAdded': function(up, files) {
-          //             // $('table').show();
-          //             // $('#success').hide();
-          //             // plupload.each(files, function(file) {
-          //             //     var progress = new FileProgress(file, 'fsUploadProgress');
-          //             //     progress.setStatus("等待...");
-          //             //     progress.bindUploadCancel(up);
-          //             // });
-          //         },
-          //         'BeforeUpload': function(up, file) {
-          //             // var progress = new FileProgress(file, 'fsUploadProgress');
-          //             // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
-          //             // if (up.runtime === 'html5' && chunk_size) {
-          //             //     progress.setChunkProgess(chunk_size);
-          //             // }
-          //         },
-          //         'UploadProgress': function(up, file) {
-          //             // var progress = new FileProgress(file, 'fsUploadProgress');
-          //             // var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
-          //             // progress.setProgress(file.percent + "%", file.speed, chunk_size);
-          //         },
-          //         'UploadComplete': function() {
-          //             // $('#success').show();
-          //         },
-          //         'FileUploaded': function(up, file, info) {
-          //             // var progress = new FileProgress(file, 'fsUploadProgress');
-          //             // progress.setComplete(up, info);
-          //         },
-          //         'Error': function(up, err, errTip) {
-          //             // $('table').show();
-          //             // var progress = new FileProgress(err.file, 'fsUploadProgress');
-          //             // progress.setError();
-          //             // progress.setStatus(errTip);
-          //         }
-          //     }
-          // };
-          // var uploader2 = Qiniu2.uploader(option2);
+          var Qiniu2 = new QiniuJsSDK();
+          var option2 = {
+              runtimes: 'html5,flash,html4',
+              browse_button: 'pickfiles_photos',
+              container: 'container_photos',
+              drop_element: 'container_photos',
+              max_file_size: '1000mb',
+              flash_swf_url: 'bower_components/plupload/js/Moxie.swf',
+              dragdrop: true,
+              chunk_size: '4mb',
+              // uptoken_url: '/uptoken',
+              uptoken: '0MLvWPnyya1WtPnXFy9KLyGHyFPNdZceomLVk0c9:zQrXlX2C__GNj4K_xEfV4tL6QdM=:eyJzY29wZSI6InFpbml1LXBsdXBsb2FkIiwiZGVhZGxpbmUiOjE0NjA1NDc2MjJ9',
+              domain: 'http://qiniu-plupload.qiniudn.com/',
+              get_new_uptoken: false,
+              auto_start: true,
+              log_level: 5,
+              init: {
+                  'FileUploaded': function(up, file, info) {
+                      var domain = up.getOption('domain');
+                      var sourceLink = domain + JSON.parse(info).key;
+                      console.log(sourceLink);
+                      $('#up_file_name_photos').val(sourceLink);
+                  },
+                  'Error': function(up, err, errTip) {
+                      // $('table').show();
+                      // var progress = new FileProgress(err.file, 'fsUploadProgress');
+                      // progress.setError();
+                      // progress.setStatus(errTip);
+                  }
+              }
+          };
+          var uploader2 = Qiniu2.uploader(option2);
 
 
 

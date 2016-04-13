@@ -77,9 +77,9 @@
                     <i class="glyphicon glyphicon-plus"></i>
                     <span>选择文件</span>
                 </a> -->
-                <a href="javascript:{$('#up_file').click()};" id="pickfiles_blogs">
+                <a href="javascript:{void(0)};" id="pickfiles_blogs">
                   <!-- <input type="file" id=up_file style="display: none;" onchange="up_file_name.value=value"> -->
-                  <input name="up_file_name" disabled="disabled">
+                  <input id="up_file_name_blogs" disabled="disabled">
                 </a>
                 <textarea name="content" rows="10" required></textarea>
                 <input type="submit" name="" value="Publish">
@@ -111,9 +111,9 @@
                   <input type="file" id=up_file style="display: none;" onchange="up_file_name.value=value">
                   <input name="up_file_name" disabled="disabled">
                 </a> -->
-                 <a href="javascript:{$('#up_file').click()};" id="pickfiles_photos">
+                 <a href="javascript:{void(0)};" id="pickfiles_photos">
                   <!-- <input type="file" id=up_file style="display: none;" onchange="up_file_name.value=value"> -->
-                  <input name="up_file_name" disabled="disabled">
+                  <input id="up_file_name_photos" disabled="disabled">
                 </a>
                 <textarea name="content" rows="5" required></textarea>
                 <input type="submit" name="" value="Publish">
@@ -161,7 +161,9 @@
               flash_swf_url: 'bower_components/plupload/js/Moxie.swf',
               dragdrop: true,
               chunk_size: '4mb',
-              uptoken_url: '/uptoken',
+              // uptoken_url: 'http://jssdk.demo.qiniu.io/uptoken',
+              uptoken: '0MLvWPnyya1WtPnXFy9KLyGHyFPNdZceomLVk0c9:wIAnrKft-gLtAp0gfbpP9lmH_Xc=:eyJzY29wZSI6InFpbml1LXBsdXBsb2FkIiwiZGVhZGxpbmUiOjE0NjA1MzAyNDR9',
+              //http://jssdk.demo.qiniu.io/uptoken
               domain: 'http://qiniu-plupload.qiniudn.com/',
               get_new_uptoken: false,
               auto_start: true,
@@ -194,6 +196,10 @@
                   'FileUploaded': function(up, file, info) {
                       // var progress = new FileProgress(file, 'fsUploadProgress');
                       // progress.setComplete(up, info);
+                      var domain = up.getOption('domain');
+                      var sourceLink = domain + JSON.parse(info).key;
+                      console.log(sourceLink);
+                      $('#up_file_name_blogs').val(sourceLink);
                   },
                   'Error': function(up, err, errTip) {
                       // $('table').show();

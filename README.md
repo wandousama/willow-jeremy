@@ -38,4 +38,4 @@ get users data GET http://localhost:5000/
 5. GET /uptoken
 
 ## API issue
-6. POST /photos /blogs 无法保存image字段。  
+6. POST `/photos` `/blogs` cannot save feild `image`   

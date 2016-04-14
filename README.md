@@ -28,3 +28,14 @@ get users data GET http://localhost:5000/
 
 `node scripts/init_data.js`
 `node scripts/clear_data.js`
+
+
+## API need implement
+1. GET /blogs?limit=3
+2. GET /photos?limit=3
+3. GET /photos?_id=56d3c6f094c43891b21173e5
+4. POST /login
+5. GET /uptoken
+
+## API issue
+6. POST /photos /blogs 无法保存image字段。  

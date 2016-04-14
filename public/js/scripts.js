@@ -134,6 +134,18 @@ var setClass = function(fatherNode) {
 var currentBlogNum=0;
 $(document).ready(function() {
 
+    var showPhotoDetail = function(id) {
+        $.get("photos?_id="+id,function(data,status){
+            alert(data);
+        });
+    }
+
+    var setShowPhotoDetail = function() {
+        $(".expand").click(function() {
+            showPhotoDetail(this.id);
+        });
+    }
+
     var buildBlogs = function(data) {
         var result='';
         var blogList = data;
@@ -182,7 +194,7 @@ $(document).ready(function() {
             photoHtml+='<div class="img">';
             photoHtml+='<img src="'+photoList[index].image+'" alt="Photos Item">';
             photoHtml+='<div class="overlay">';
-            photoHtml+='<a href="#photos" class="expand"><i class="fa fa-search"></i><br>View More</a>';
+            photoHtml+='<a href="javascript:void(0)" class="expand" id="'+photoList[index]._id+'"><i class="fa fa-search"></i><br>View More</a>';
             photoHtml+='<a class="close-overlay hidden">x</a>';
             photoHtml+='</div>';
             photoHtml+='</div>';
@@ -213,6 +225,7 @@ $(document).ready(function() {
         setClass();
         setOverlays();
         setFlexsliders();
+        setShowPhotoDetail();
     });
 
 
@@ -266,4 +279,5 @@ $(document).ready(function() {
             setFlexsliders();
         });
     });
+
 });

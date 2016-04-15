@@ -170,8 +170,6 @@
               log_level: 5,
               init: {
                   'FileUploaded': function(up, file, info) {
-                      // var progress = new FileProgress(file, 'fsUploadProgress');
-                      // progress.setComplete(up, info);
                       var domain = up.getOption('domain');
                       var sourceLink = domain + JSON.parse(info).key;
                       console.log(sourceLink);

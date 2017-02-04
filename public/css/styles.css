@@ -323,6 +323,21 @@ Admin
     margin-bottom: 50px;
 }
 
+.show-image {
+    width: 100%;
+    height: 100%;
+    position:fixed;
+    padding: 5px;
+    border-radius: 4px;
+    top:0%;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    display: none;
+}
+
+.show-detail-image {
+    height: 100%;
+}
 
 /* ==========================================================================
 Footer

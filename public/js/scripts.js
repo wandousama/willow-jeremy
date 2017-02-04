@@ -136,7 +136,11 @@ $(document).ready(function() {
 
     var showPhotoDetail = function(id) {
         $.get("photos?_id="+id,function(data,status){
-            alert(data);
+            var photo=data[0];
+            $(".show-detail-image").attr("src",photo.image);
+            //$(".show-detail-title").text(photo.title);
+            //$(".show-detail-content").text(photo.content);
+            $(".show-image").fadeIn();
         });
     }
 
@@ -194,7 +198,7 @@ $(document).ready(function() {
             photoHtml+='<div class="img">';
             photoHtml+='<img src="'+photoList[index].image+'" alt="Photos Item">';
             photoHtml+='<div class="overlay">';
-            photoHtml+='<a href="javascript:void(0)" class="expand" id="'+photoList[index]._id+'"><i class="fa fa-search"></i><br>View More</a>';
+            photoHtml+='<a href="javascript:void(0)" class="expand" id="'+photoList[index]._id+'"><i class="fa fa-search"></i><br>View Photo</a>';
             photoHtml+='<a class="close-overlay hidden">x</a>';
             photoHtml+='</div>';
             photoHtml+='</div>';
@@ -278,6 +282,10 @@ $(document).ready(function() {
             setClass();
             setFlexsliders();
         });
+    });
+
+    $(".show-image").click(function() {
+        $(".show-image").fadeOut();
     });
 
 });
